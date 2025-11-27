@@ -1,536 +1,373 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-PT">
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Freelancer - Lucas Maranho</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Theme CSS -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Desenvolvimento Profissional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Estilos personalizados para a scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background-color: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
+<body class="bg-gray-50 text-gray-800 font-sans h-screen flex overflow-hidden">
 
-<body id="page-top" class="index">
-<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
-    <!-- Navigation -->
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col hidden md:flex">
+        <div class="p-6 border-b border-gray-100">
+            <h1 class="text-xl font-bold text-indigo-600 flex items-center gap-2">
+                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                EduCorp
+            </h1>
+            <p class="text-xs text-gray-500 mt-1">Portal de Formação</p>
+        </div>
+        <nav class="flex-1 overflow-y-auto p-4 space-y-2" id="sidebar-nav">
+            <!-- Items inseridos via JS -->
+        </nav>
+        <div class="p-4 border-t border-gray-100 bg-gray-50">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold">
+                    U
+                </div>
+                <div>
+                    <p class="text-sm font-medium">Utilizador</p>
+                    <p class="text-xs text-gray-500">Colaborador</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Mobile Header -->
+    <div class="md:hidden fixed w-full bg-white border-b z-20 flex justify-between items-center p-4">
+        <h1 class="font-bold text-indigo-600">EduCorp</h1>
+        <button id="mobile-menu-btn" class="text-gray-600">
+            <i data-lucide="menu"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-30 hidden">
+        <div class="bg-white w-64 h-full p-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="font-bold text-lg">Menu</h2>
+                <button id="close-mobile-menu" class="text-gray-500">
+                    <i data-lucide="x"></i>
                 </button>
-                <a class="navbar-brand" href="#page-top">Lucas Maranho</a>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#portfolio">Portfolio</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#about">About</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+            <nav class="space-y-2" id="mobile-sidebar-nav"></nav>
         </div>
-        <!-- /.container-fluid -->
-    </nav>
-
-    <!-- Header -->
-    <header>
-        <div class="container" id="maincontent" tabindex="-1">
-            <div class="row">
-                <div class="col-lg-12">
-                    <img class="img-responsive" src="img/profile.png" alt="">
-                    <div class="intro-text">
-                        <h1 class="name">Lucas Maranho</h1>
-                        <hr class="star-light">
-                        <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Portfolio</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/cabin.png" class="img-responsive" alt="Cabin">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/cake.png" class="img-responsive" alt="Slice of cake">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/circus.png" class="img-responsive" alt="Circus tent">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/game.png" class="img-responsive" alt="Game controller">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/safe.png" class="img-responsive" alt="Safe">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/submarine.png" class="img-responsive" alt="Submarine">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="success" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>About</h2>
-                    <hr class="star-light">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-2">
-                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
-                </div>
-                <div class="col-lg-4">
-                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
-                </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="#" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download Theme
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Contact Me</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                    <form name="sentMessage" id="contactForm" novalidate>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="email">Email Address</label>
-                                <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="message">Message</label>
-                                <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <br>
-                        <div id="success"></div>
-                        <div class="row">
-                            <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">Send</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>3481 Melrose Place
-                            <br>Beverly Hills, CA 90210</p>
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Google Plus</span><i class="fa fa-fw fa-google-plus"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Twitter</span><i class="fa fa-fw fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Linked In</span><i class="fa fa-fw fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Dribble</span><i class="fa fa-fw fa-dribbble"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <h3>About Freelancer</h3>
-                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        Copyright &copy; Your Website 2016
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
     </div>
 
-    <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-8 pt-20 md:pt-8 scroll-smooth w-full">
+        <div class="max-w-5xl mx-auto" id="content-area">
+            <!-- Conteúdo inserido via JS -->
+        </div>
+    </main>
+
+    <script>
+        // Dados do Curso
+        const courseData = [
+            {
+                id: "cnv",
+                title: "Comunicação Não Violenta",
+                icon: "heart-handshake",
+                color: "text-rose-500",
+                bg: "bg-rose-50",
+                description: "A Comunicação Não Violenta (CNV), desenvolvida pelo psicólogo Marshall Rosenberg, é uma abordagem que visa criar conexões autênticas e resolver conflitos de forma pacífica. Baseia-se em quatro pilares: Observação (sem julgamento), Sentimento (identificar emoções), Necessidade (o que preciso) e Pedido (ação concreta).",
+                articles: [
+                    { title: "Comunicação não-violenta: guia prático", url: "https://toppeople.com.br/comunicacao-nao-violenta-guia-pratico-para-evitar-conflitos/", domain: "TopPeople Blog" },
+                    { title: "A chave para uma liderança humanizada", url: "https://zup.com.br/blog/comunicacao-nao-violenta/", domain: "Zup Innovation" },
+                    { title: "Os 4 passos da CNV na Prática", url: "https://www.napratica.org.br/comunicacao-nao-violenta/", domain: "Na Prática" }
+                ],
+                podcasts: [
+                    { title: "CNV Cast", platform: "Spotify/Apple" },
+                    { title: "Braincast - A arte da conversa difícil", platform: "B9" },
+                    { title: "Para dar nome às coisas", platform: "Spotify" }
+                ],
+                course: {
+                    title: "Introdução à Comunicação Não Violenta",
+                    url: "https://www.youtube.com/playlist?list=PLw-j-52fT_wV9vBBSY8QxGZzXlHl5R7l_",
+                    provider: "Gratuito (YouTube Playlist)"
+                },
+                videos: [
+                    { title: "O poder da vulnerabilidade", author: "Brené Brown", embedId: "iCvmsMzlF7o" },
+                    { title: "10 ways to have a better conversation", author: "Celeste Headlee", embedId: "R1vskiVDwl4" },
+                    { title: "Marshall Rosenberg sobre CNV (Legendado)", author: "M. Rosenberg", embedId: "M-129JLTjkQ" } // Exemplo ilustrativo
+                ]
+            },
+            {
+                id: "time",
+                title: "Gestão do Tempo",
+                icon: "clock",
+                color: "text-blue-500",
+                bg: "bg-blue-50",
+                description: "Gestão do tempo não é apenas fazer mais coisas em menos tempo, é fazer as coisas certas. Técnicas como a Matriz de Eisenhower (Urgente vs Importante) e o Método Pomodoro ajudam a reduzir a ansiedade e aumentar o foco nas prioridades reais.",
+                articles: [
+                    { title: "Matriz de Eisenhower: Como priorizar", url: "https://todoist.com/pt-BR/productivity-methods/eisenhower-matrix", domain: "Todoist" },
+                    { title: "Gestão do tempo e produtividade", url: "https://hbr.org/topic/time-management", domain: "Harvard Business Review" },
+                    { title: "Técnica Pomodoro: O guia completo", url: "https://francescocirillo.com/pages/pomodoro-technique", domain: "Cirillo Company" }
+                ],
+                podcasts: [
+                    { title: "Produtivista", platform: "Spotify" },
+                    { title: "Organize-se", platform: "Apple Podcasts" },
+                    { title: "Tim Ferriss Show (Inglês)", platform: "Spotify" }
+                ],
+                course: {
+                    title: "Gestão do Tempo",
+                    url: "https://educacao-executiva.fgv.br/cursos/online/curta-media-duracao-online/gestao-do-tempo",
+                    provider: "FGV Online (Gratuito)"
+                },
+                videos: [
+                    { title: "Inside the mind of a master procrastinator", author: "Tim Urban", embedId: "arj7oStGLkU" },
+                    { title: "How to gain control of your free time", author: "Laura Vanderkam", embedId: "n3kNlFMXslo" },
+                    { title: "How to multiply your time", author: "Rory Vaden", embedId: "y2X7c9TUQJ8" }
+                ]
+            },
+            {
+                id: "emotional",
+                title: "Gestão Emocional",
+                icon: "heart",
+                color: "text-emerald-500",
+                bg: "bg-emerald-50",
+                description: "Inteligência Emocional (IE) é a capacidade de reconhecer e gerir as suas próprias emoções e influenciar as emoções dos outros. É crucial para liderança, trabalho em equipa e bem-estar pessoal, ajudando a evitar o burnout e a reagir melhor sob pressão.",
+                articles: [
+                    { title: "Inteligência Emocional no Trabalho", url: "https://www.scielo.br/", domain: "Scielo (Acadêmico)" },
+                    { title: "Agilidade Emocional: O conceito", url: "https://www.susandavid.com/", domain: "Susan David Blog" },
+                    { title: "5 Pilares da Inteligência Emocional", url: "https://blog.psicologiaviva.com.br/inteligencia-emocional/", domain: "Psicologia Viva" }
+                ],
+                podcasts: [
+                    { title: "Estamos Bem?", platform: "Spotify" },
+                    { title: "Invisibilia (NPR)", platform: "Inglês" },
+                    { title: "Autoconsciente", platform: "Spotify" }
+                ],
+                course: {
+                    title: "Inteligência Emocional",
+                    url: "https://www.escolavirtual.gov.br/curso/318",
+                    provider: "Escola Virtual Gov"
+                },
+                videos: [
+                    { title: "The gift and power of emotional courage", author: "Susan David", embedId: "NDQ1Mi5k4Co" },
+                    { title: "Why we all need to practice emotional first aid", author: "Guy Winch", embedId: "F2hc2FLO_6U" },
+                    { title: "Why aren't we more compassionate?", author: "Daniel Goleman", embedId: "Z0J0wY2jV4g" }
+                ]
+            }
+        ];
+
+        // Estado da Aplicação
+        let activeModuleId = localStorage.getItem('lastActiveModule') || courseData[0].id;
+        let completedModules = JSON.parse(localStorage.getItem('completedModules')) || {};
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderSidebar();
+            renderContent(activeModuleId);
+            setupMobileMenu();
+        });
+
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const close = document.getElementById('close-mobile-menu');
+
+            btn.addEventListener('click', () => menu.classList.remove('hidden'));
+            close.addEventListener('click', () => menu.classList.add('hidden'));
+        }
+
+        // Renderiza a Sidebar
+        function renderSidebar() {
+            const nav = document.getElementById('sidebar-nav');
+            const mobileNav = document.getElementById('mobile-sidebar-nav');
+            
+            const generateHTML = (isMobile) => courseData.map(module => {
+                const isActive = module.id === activeModuleId;
+                const isCompleted = completedModules[module.id];
+                
+                return `
+                    <button 
+                        onclick="switchModule('${module.id}', ${isMobile})"
+                        class="w-full flex items-center justify-between p-3 rounded-lg transition-colors duration-200 ${isActive ? 'bg-indigo-50 text-indigo-700 font-medium' : 'text-gray-600 hover:bg-gray-50'}"
+                    >
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="${module.icon}" class="w-5 h-5 ${isActive ? 'text-indigo-600' : 'text-gray-400'}"></i>
+                            <span>${module.title}</span>
+                        </div>
+                        ${isCompleted ? '<i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i>' : ''}
+                    </button>
+                `;
+            }).join('');
+
+            nav.innerHTML = generateHTML(false);
+            mobileNav.innerHTML = generateHTML(true);
+            lucide.createIcons();
+        }
+
+        // Troca o módulo ativo
+        window.switchModule = (id, isMobile) => {
+            activeModuleId = id;
+            localStorage.setItem('lastActiveModule', id);
+            renderSidebar();
+            renderContent(id);
+            if (isMobile) {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            }
+        };
+
+        // Renderiza o conteúdo principal
+        function renderContent(id) {
+            const module = courseData.find(m => m.id === id);
+            const container = document.getElementById('content-area');
+            const isCompleted = completedModules[id];
+
+            container.innerHTML = `
+                <!-- Header -->
+                <header class="mb-8">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold ${module.color} ${module.bg} uppercase tracking-wider">Formação</span>
+                        ${isCompleted ? '<span class="px-3 py-1 rounded-full text-xs font-semibold text-green-700 bg-green-100 uppercase tracking-wider flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> Concluído</span>' : ''}
                     </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">${module.title}</h1>
+                    <p class="text-lg text-gray-600 leading-relaxed max-w-3xl">${module.description}</p>
+                    
+                    <div class="mt-6">
+                        <label class="inline-flex items-center cursor-pointer select-none group">
+                            <div class="relative">
+                                <input type="checkbox" class="sr-only" onchange="toggleComplete('${module.id}')" ${isCompleted ? 'checked' : ''}>
+                                <div class="block bg-gray-200 w-14 h-8 rounded-full group-hover:bg-gray-300 transition-colors ${isCompleted ? '!bg-green-500' : ''}"></div>
+                                <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition transform ${isCompleted ? 'translate-x-6' : ''}"></div>
+                            </div>
+                            <span class="ml-3 text-sm font-medium text-gray-700 group-hover:text-gray-900">Marcar como concluído</span>
+                        </label>
+                    </div>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Coluna Principal (Videos) -->
+                    <div class="lg:col-span-2 space-y-8">
+                        <section>
+                            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <i data-lucide="play-circle" class="text-indigo-600"></i>
+                                Vídeos Essenciais
+                            </h2>
+                            <div class="space-y-6">
+                                ${module.videos.map(video => `
+                                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                                        <div class="video-container">
+                                            <iframe src="https://www.youtube.com/embed/${video.embedId}" title="${video.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        </div>
+                                        <div class="p-4">
+                                            <h3 class="font-bold text-lg">${video.title}</h3>
+                                            <p class="text-sm text-gray-500">${video.author} • TED/Talk</p>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Sidebar Direita (Links e Recursos) -->
+                    <div class="space-y-8">
+                        
+                        <!-- Curso Gratuito -->
+                        <div class="bg-indigo-600 rounded-xl p-6 text-white shadow-lg relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white opacity-10 rounded-full"></div>
+                            <h3 class="font-bold text-lg mb-2 relative z-10">Curso Gratuito Recomendado</h3>
+                            <p class="text-indigo-100 text-sm mb-4 relative z-10">${module.course.provider}</p>
+                            <a href="${module.course.url}" target="_blank" class="inline-flex items-center gap-2 bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-indigo-50 transition-colors relative z-10">
+                                Aceder ao Curso <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+
+                        <!-- Artigos -->
+                        <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                            <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <i data-lucide="file-text" class="text-blue-500"></i>
+                                Leitura Recomendada
+                            </h2>
+                            <ul class="space-y-4">
+                                ${module.articles.map(article => `
+                                    <li>
+                                        <a href="${article.url}" target="_blank" class="group block">
+                                            <h4 class="font-medium text-gray-800 group-hover:text-indigo-600 transition-colors text-sm">${article.title}</h4>
+                                            <p class="text-xs text-gray-400 mt-1 flex items-center gap-1">
+                                                ${article.domain} <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+                                            </p>
+                                        </a>
+                                    </li>
+                                `).join('')}
                             </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/cake.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
+                        </section>
+
+                        <!-- Podcasts -->
+                        <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                            <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <i data-lucide="headphones" class="text-purple-500"></i>
+                                Podcasts
+                            </h2>
+                            <ul class="space-y-3">
+                                ${module.podcasts.map(pod => `
+                                    <li class="flex items-start gap-3">
+                                        <div class="w-8 h-8 rounded bg-purple-50 flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="mic" class="w-4 h-4 text-purple-500"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium text-sm text-gray-800">${pod.title}</p>
+                                            <p class="text-xs text-gray-500">${pod.platform}</p>
+                                        </div>
+                                    </li>
+                                `).join('')}
                             </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/circus.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/game.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/safe.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/submarine.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button id="btnSubmit" type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                        </section>
 
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        // Marca/Desmarca conclusão
+        window.toggleComplete = (id) => {
+            if (completedModules[id]) {
+                delete completedModules[id];
+            } else {
+                completedModules[id] = true;
+            }
+            localStorage.setItem('completedModules', JSON.stringify(completedModules));
+            renderSidebar();
+            renderContent(id); // Re-render para atualizar UI
+        };
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
-
-    <!-- Theme JavaScript -->
-    <script src="js/freelancer.min.js"></script>
-
+    </script>
 </body>
-
 </html>
